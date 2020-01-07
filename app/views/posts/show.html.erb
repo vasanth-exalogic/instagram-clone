@@ -1,0 +1,67 @@
+<div class="instagram-card">
+  <div class="instagram-card-header">
+    <table>
+      <tr>
+        <td><%= image_tag(@user.dp ,class: "instagram-card-user-image")%></td>
+        <td><a class="instagram-card-user-name" href="<%= profile_path(@user.username) %>" style="font-size:17px;color:black;"><%= @user.username %></a></td>
+      </tr>
+    </table>
+    <div class="instagram-card-time"></div>
+  </div>
+
+  <div class="intagram-card-image">
+    <%= image_tag(@post.image, style: "height:600px;width:595px;crop:stretch;") %>
+  </div>
+
+  <div class="instagram-card-content">
+    <table>
+      <tr>
+        <td style="width:20px;">
+          <% if current_user.likes.where(post_id: @post.id).count != 0 %>
+            <a href="<%= unlike_path(@post) %>"><i class="fa fa-heart fa-2x" style="color:red;"></i></a>
+          <% else %>
+            <a href="<%= like_path(@post) %>"><i class="fa fa-heart fa-2x" style="color:darkgrey;"></i></a>
+          <% end %>
+        </td>
+        <td> &nbsp; &nbsp; &nbsp;<a onclick="ShowComment();" href="#"><i class="fa fa-comment fa-2x" style="color:darkgrey;"></i></a></td>
+        <td><i class="fa fa-share fa-2x" style="color:darkgrey;"></i></td>
+        <td> &nbsp; &nbsp;<%= @likes.count %> likes</td>
+      </tr>
+      <tr>
+        <td colspan="2"><pre><a class="instagram-card-content-user" href="<%= profile_path(@user.username) %>" style="font-size:15px;color:black;"><%= @user.username %></a>
+<br><%= @post.caption %></pre></td>
+      </tr>
+      <tr id="comment" style="display:none">
+          <form action="<%= new_comment_path(@post) %>" method="post">
+            <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+            <td><input type="text" name="list[:comment]"></td>
+            <td><input type="submit"></td>
+          </form>
+      </tr>
+    </table>
+
+
+    <!-- <p class="comments">ver los 48 comentarios</p>
+    <br><a class="user-comment" href="https://www.instagram.com/anitzakm/">sanguine.j@loaf_made</a> wowwwwww</br>
+    <br><a class="user-comment" href="https://www.instagram.com/anitzakm/">spainstakeoverWow</a> 😍</br>
+    <br><a class="user-comment" href="https://www.instagram.com/anitzakm/">edieandottotravelsSo</a> cool ❄️</br>
+  <hr> -->
+  </div>
+
+  <!-- <div class="instagram-card-footer">
+    <a class="footer-action-icons" href="#"><i class="fa fa-heart-o"></i></a>
+    <input class="comments-input" type="text" placeholder="Añade un comentario..."/>
+    <a class="footer-action-icons" href="#"><i class="fa fa-ellipsis-h"></i></a>
+  </div> -->
+</div>
+
+<script type="text/javascript">
+  function ShowComment() {
+          var x = document.getElementById('comment');
+          if (x.style.display == 'none') {
+              x.style.display = 'block';
+          } else {
+              x.style.display = 'none';
+          }
+      }
+</script>

@@ -1,0 +1,23 @@
+<%= form_for(@user, url: update_profile_path) do |f| %>
+      <table align="center">
+        <tr>
+          <td>Dp</td>
+          <td><%= f.file_field :dp %></td>
+        </tr>
+        <tr>
+          <td>Username</td>
+          <td><%= f.text_field :username %></td>
+        </tr>
+        <tr>
+          <td>Name</td>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        <tr>
+          <td>Bio</td>
+          <td><%= f.text_area :bio %></td>
+        </tr>
+        <tr>
+          <td colspan="2"><%= f.submit "Update Profile"%></td>
+        </tr>
+      </table>
+    <% end %>

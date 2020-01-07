@@ -1,0 +1,77 @@
+<header>
+
+	<div class="container">
+
+		<div class="profile">
+
+			<div class="profile-image">
+				<% unless @user.dp.attached? %>
+					<%= image_tag('user_logo', style: "width:150px;height:150px;crop:stretch;") %>
+				<% else %>
+					<%= image_tag(@user.dp, style: "width:150px;height:150px;crop:stretch;") %>
+				<% end %>
+			</div>
+
+			<div class="profile-user-settings">
+
+				<h1 class="profile-user-name"><%= @user.username %></h1>
+
+				<% if current_user.id == @user.id %>
+				<a href="<%= edit_profile_path(@user.username) %>"><button class="btn profile-edit-btn">Edit Profile</button></a>
+
+				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fa fa-cog" aria-hidden="true"></i></button>
+				<% else %>
+					<% if @temp.count == 0 %>
+						<a href="<%= new_follow_path(@user) %>" method="get"><button class="btn profile-edit-btn">Follow</button></a>
+					<% else %>
+					<%= link_to destroy_follow_path(@temp.first.id), method: :delete, data: {confirm: 'Really?'} do %>
+						<button class="btn profile-edit-btn">Following</button>
+					<% end %>
+					<% end %>
+				<% end %>
+			</div>
+
+			<div class="profile-stats">
+
+				<ul>
+					<li><span class="profile-stat-count"><%= @posts.count %></span> posts</li>
+					<li><span class="profile-stat-count"><%= @followers.count %></span> followers</li>
+					<li><span class="profile-stat-count"><%= @following.count %></span> following</li>
+				</ul>
+
+			</div>
+
+			<div class="profile-bio">
+
+				<p><span class="profile-real-name"><%= @user.name %><br></span> <%= @user.bio %></p>
+
+			</div>
+
+		</div>
+		<!-- End of profile section -->
+
+	</div>
+	<!-- End of container -->
+
+</header>
+<main>
+
+	<div class="container">
+
+		<div class="gallery">
+			<% @posts.each do |p| %>
+			<% post = Post.find(p.id) %>
+			<div class="gallery-item" tabindex="0">
+
+				<%= link_to image_tag(post.image, style: "width:300px;height:300px;crop:stretch;", class: "gallery-image"), post_path(post) %>
+
+			</div>
+			<% end %>
+
+		</div>
+		<!-- End of gallery -->
+
+	</div>
+	<!-- End of container -->
+
+</main>

@@ -1,0 +1,26 @@
+<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+  <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Overpass+Mono" rel="stylesheet">
+
+  <div id="wrapper">
+  <div class="main-content">
+    <div class="header">
+      <img src="https://i.imgur.com/zqpwkLQ.png" />
+    </div>
+    <div class="l-part">
+      <%= f.email_field :email, :placeholder => "Email", :class => "input-1" %>
+      <div class="overlap-text">
+        <%= f.password_field :password, :placeholder => "Password", :class => "input-2" %>
+        <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+          <%= link_to "Forgot?", new_password_path(resource_name) %><br />
+        <% end %>
+      </div>
+      <%= f.submit "Log In", :class => "btn" %>
+    </div>
+  </div>
+  <div class="sub-content">
+    <div class="s-part">
+      Don't have an account? <%= link_to "Sign Up", new_user_registration_path %>
+    </div>
+  </div>
+  </div>
+<% end %>

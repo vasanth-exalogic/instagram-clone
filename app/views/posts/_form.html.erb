@@ -1,0 +1,33 @@
+<%= form_with(model: post, local: true) do |form| %>
+
+  <%= form.hidden_field :user_id, :value => current_user.id %>
+
+  <table>
+    <tr>
+      <td colspan="2">
+        <% if post.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+            <ul>
+              <% post.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </td>
+    </tr>
+    <tr>
+      <td><%= form.label :image %></td>
+      <td><%= form.file_field :image, :required => true %></td>
+    </tr>
+    <tr>
+      <td><%= form.label :caption %></td>
+      <td><%= form.text_area :caption %></td>
+    </tr>
+    <tr>
+      <td colspan="2"><%= form.submit %></td>
+    </tr>
+  </table>
+<% end %>

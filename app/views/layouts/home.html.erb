@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Instagram</title>
+    <%= stylesheet_link_tag 'home', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Instagram</title>
+    <link rel="shortcut icon" href="img/favicon.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    <header class="header">
+    <div class="logo">
+        <i class="fa fa-instagram" style="font-size:48px;color:purple;"></i>
+    </div>
+    <div class="search-container">
+      <div class="search">
+        <i class="fa fa-search"></i>
+        <input type="text" placeholder="Search">
+      </div>
+    </div>
+    <div class="icons">
+      <a href="/"><i class="fa fa-wpexplorer" aria-hidden="true"></i></a>
+      <a href="#"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+      <a href="/posts/new"><i class="fa fa-upload" aria-hidden="true"></i></a>
+      <a href="<%= profile_path(current_user.username) %>"><i class="fa fa-user-o" aria-hidden="true"></i></a>
+      <%= link_to destroy_user_session_path, method: :delete, data: {confirm: "Are you sure"} do %>
+        <span>
+          <i class="fa fa-sign-out"></i>
+        </span>
+      <% end %>
+    </div>
+  </header>
+  <div class="below-header">
+    <%= yield %>
+  </div>
+  </body>
+</html>
